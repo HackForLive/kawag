@@ -1,0 +1,6 @@
+kivy[full]
+bs4
+selenium
+webdriver-manager
+requests-html
+pylint
