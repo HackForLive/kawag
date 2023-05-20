@@ -1,8 +1,11 @@
 """
 A simple regex test example for kaktus watch dog notifications
+
+note: export PYTHONPATH, e.g. # [print(msg.encode('utf-16', 'surrogatepass').decode('utf-16')) for msg in messages]
+
 """
 import unittest
-from kaktus_regex import find_date
+from kaktus_regex import find_date, find_hour_range
 
 
 class TestKaktusRegex(unittest.TestCase):
@@ -54,7 +57,9 @@ class TestKaktusRegex(unittest.TestCase):
 
     def test_case_for_hours(self):
         for idx, message in enumerate(self.messages):
-            match_date = find_date(message=message)[0]
+            match_date = find_hour_range(message=message)
+            self.assertNotEqual(match_date, [])
+            match_date = match_date[0]
 
             self.assertIsNotNone(match_date)
             print(match_date)
