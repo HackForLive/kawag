@@ -1,4 +1,5 @@
 kivy[full]
+kivymd
 bs4
 selenium
 webdriver-manager

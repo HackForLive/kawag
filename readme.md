@@ -2,7 +2,7 @@
 
 * Create python venv
     ```
-    python3 -m venv kivy_venv
+    python3 -m venv venv
     ```
 
 * Activate venv

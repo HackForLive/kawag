@@ -1,0 +1,44 @@
+#:kivy 2.1.0
+MDScreen:
+    BoxLayout:
+        orientation: "vertical"
+		size: root.width, root.height
+        Label:
+			id: word_label
+			text_size: self.size
+			halign: "center"
+			valign: "middle"
+			text: "Enter A Name"
+			font_size: 32
+
+		TextInput:
+			id: word_input
+			multiline: False
+			size_hint: (1, .5)
+
+		Button:
+			size_hint: (1, .5)
+			font_size: 32
+			text: "Submit Name"
+			on_press: app.submit()
+
+		Button:
+			size_hint: (1, .5)
+			font_size: 32
+			text: "Show Records"
+			on_press: app.show_records()
+        # Label:
+        #     text: "NeuralRandom"
+        #     font_size: 64
+        #     color: 0.92, 0.45, 0
+        # Label:
+        #     id: random_label
+        #     text: "-"
+        #     size_hint_y: None
+        #     text_size: self.width, None
+        #     height: self.texture_size[1]
+        # Button:
+        #     text: "Generate"
+        #     font_size: 32
+        #     size: 100, 50
+        #     on_press: root.generate_number()
