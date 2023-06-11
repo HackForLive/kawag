@@ -48,7 +48,7 @@ class SqlLiteManager(object):
 
             # Create A Cursor
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO notifications VALUES (:first)",
+            cursor.execute(f"INSERT INTO {self._notification_table_name} VALUES (:first)",
                     {
                         'first': notification,
                     }
@@ -71,7 +71,7 @@ class SqlLiteManager(object):
             # Create A Cursor
             cursor = conn.cursor()
             # Grab records from database
-            cursor.execute("SELECT * FROM notifications")
+            cursor.execute(f"SELECT * FROM {self._notification_table_name}")
 
             # Commit our changes
             conn.commit()
