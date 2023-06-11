@@ -14,6 +14,7 @@ class Kaktus(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.db_manager = SqlLiteManager(db_file=config['DEFAULT']['DB_NAME'])
+        self.db_manager.create_notification_table()
 
     def generate_number(self):
         self.random_label.text = get_kaktus_latest()
