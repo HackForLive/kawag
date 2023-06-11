@@ -26,9 +26,11 @@ class Kaktus(MDApp):
         return Builder.load_file('kaktus.kv')
 
     def submit(self):
-        self.db_manager.insert_new_record(notification=self.root.ids.word_input.text)
+        text = self.root.ids.word_input.text
+        text = get_kaktus_latest()
+        self.db_manager.insert_new_record(notification=text)
         # Add a little message
-        self.root.ids.word_label.text = f'{self.root.ids.word_input.text} Added'
+        self.root.ids.word_label.text = f'{text} Added'
         # Clear the input box
         self.root.ids.word_input.text = ''
 

@@ -5,3 +5,4 @@ selenium
 webdriver-manager
 requests-html
 pylint
+python-for-android
