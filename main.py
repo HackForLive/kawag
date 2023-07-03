@@ -1,19 +1,20 @@
 from pathlib import Path
+import os
 import sqlite3
 import configparser
 
 from requests_html import HTMLSession
 from kivy.lang import Builder
 from kivymd.app import MDApp
-from db.manager import SqlLiteManager
+from src.db.manager import SqlLiteManager
 
 config = configparser.ConfigParser()
-config.read((Path(__file__).parent).parent.joinpath('config.ini'))
+config.read(Path(__file__).parent.joinpath('config.ini'))
 
 class Kaktus(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.db_manager = SqlLiteManager(db_file=config['DEFAULT']['DB_NAME'])
+        self.db_manager = SqlLiteManager(db_file=(Path(__file__).parent).parent.joinpath(config['DEFAULT']['DB_NAME']))
         self.db_manager.create_notification_table()
 
     def generate_number(self):
@@ -24,7 +25,7 @@ class Kaktus(MDApp):
         self.theme_cls.primary_palette = "Orange"
         self.db_manager.create_connection()
 
-        return Builder.load_file('kaktus.kv')
+        return Builder.load_file(os.path.join('src', 'kaktus.kv'))
 
     def submit(self):
         text = self.root.ids.word_input.text

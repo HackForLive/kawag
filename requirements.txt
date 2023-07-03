@@ -6,3 +6,13 @@ webdriver-manager
 requests-html
 pylint
 python-for-android
+buildozer
+Cython==0.29.33
+setuptools
+bs4
+fake-useragent
+parse
+pyppeteer
+pyquery
+requests
+w3lib

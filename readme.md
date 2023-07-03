@@ -30,17 +30,20 @@
     ```
 ## 1. Android Setup
 
+Guide:
+https://kivy.org/doc/stable/guide/packaging-android.html
+
 Python for android: 
 https://python-for-android.readthedocs.io/en/latest/quickstart/
 
 ```
-p4a apk --private $HOME/code/myapp --package=org.kawag --name "KAWAG" --version 0.1 --bootstrap=sdl2 --requirements=python3,kivy
+p4a apk --private $HOME/git/kawag --package=org.kawag --name "KAWAG" --version 0.1 --bootstrap=sdl2 --requirements=python3,kivy --sdk-dir '/home/michael/Android/Sdk/platforms/android-33' --ndk-dir '/home/michael/Android/Sdk/ndk/25.2.9519653' --android-api '33' --ndk-api '31'
 ```
 
+### Debug
+
 ```
---sdk-dir '/home/michael/Android/Sdk/platforms/android-33'
---ndk-dir '/home/michael/Android/Sdk/ndk/25.2.9519653'
---android-api '33'
---ndk-api '31'
---ndk-version '25.2.9519653'
+buildozer -v android debug
+adb install -r bin/*.apk
+adb logcat -s "python"
 ```
