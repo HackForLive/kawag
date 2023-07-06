@@ -1,6 +1,6 @@
 {
-    "python.defaultInterpreterPath": "/home/michael/git/kaktus-watchdog/kivy_venv/bin/python3",
-    "pylint.path": ["/home/michael/git/kaktus-watchdog/kivy_venv/bin/pylint"],
+    "python.defaultInterpreterPath": "/home/michael/git/kawag/venv/bin/python3",
+    "pylint.path": ["/home/michael/git/kawag/venv/bin/pylint"],
     "python.linting.pylintArgs": [
         "--reports", "yes", 
         "--disable", "I0011",

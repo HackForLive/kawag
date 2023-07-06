@@ -6,6 +6,7 @@ import configparser
 from requests_html import HTMLSession
 from kivy.lang import Builder
 from kivymd.app import MDApp
+
 from src.db.manager import SqlLiteManager
 
 config = configparser.ConfigParser()
@@ -46,11 +47,20 @@ class Kaktus(MDApp):
             self.root.ids.word_label.text = f'{word}'
 
 def get_kaktus_latest():
+    
+    # from selenium import webdriver
+    # from time import sleep
+    # options = webdriver.ChromeOptions() 
+    # options.add_argument('--headless') 
+    # driver = webdriver.Chrome(options=options)
+    # driver.get(config['DEFAULT']['BASE_URL'])
+    # htmlSource = driver.page_source
+    # soup = BeautifulSoup(htmlSource, 'html.parser')
+    # print(soup.find('.box-bubble'))
     session = HTMLSession()
 
     response = session.get(config['DEFAULT']['BASE_URL'])
-
-    return response.html.find('.box-bubble', first=True).find('p', first=True).text
+    return response.html.text[16:36]#find('.box-bubble', first=True).find('p', first=True).text
 
 if __name__ == "__main__":
     Kaktus().run()
