@@ -3,6 +3,7 @@ import os
 import sqlite3
 import configparser
 
+from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 from kivy.lang import Builder
 from kivymd.app import MDApp
@@ -47,11 +48,10 @@ class Kaktus(MDApp):
             self.root.ids.word_label.text = f'{word}'
 
 def get_kaktus_latest():
-    
     # from selenium import webdriver
     # from time import sleep
-    # options = webdriver.ChromeOptions() 
-    # options.add_argument('--headless') 
+    # options = webdriver.ChromeOptions()
+    # options.add_argument('--headless')
     # driver = webdriver.Chrome(options=options)
     # driver.get(config['DEFAULT']['BASE_URL'])
     # htmlSource = driver.page_source
@@ -60,7 +60,9 @@ def get_kaktus_latest():
     session = HTMLSession()
 
     response = session.get(config['DEFAULT']['BASE_URL'])
-    return response.html.text[16:36]#find('.box-bubble', first=True).find('p', first=True).text
+    soup = BeautifulSoup(response.html.raw_html, 'html.parser')
+    text = soup.find("div", {'class': 'box-bubble'}).find_all('p')[0].text
+    return text#find('.box-bubble', first=True).find('p', first=True).text
 
 if __name__ == "__main__":
     Kaktus().run()
