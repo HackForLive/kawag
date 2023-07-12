@@ -7,3 +7,5 @@ python-for-android
 buildozer
 Cython==0.29.33
 setuptools
+jnius
+plyer

@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,kivymd,sqlite3,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml,beautifulsoup4
+requirements = python3,kivy,kivymd,sqlite3,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml,beautifulsoup4,jnius,plyer,android
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -55,6 +55,7 @@ orientation = portrait
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
+services = Notification:src/notification/service.py
 
 #
 # OSX Specific
@@ -102,7 +103,8 @@ android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTE
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 31
+# TODO: fix
+android.api = 30
 
 # (int) Minimum API your APK / AAB will support.
 #android.minapi = 21
