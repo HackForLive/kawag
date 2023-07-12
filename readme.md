@@ -1,4 +1,14 @@
+# Overview
+
+The project aims at getting information about special double credit offer from Kaktus mobile operator. The information is available at website https://www.mujkaktus.cz/chces-pridat where the information is published in human readable format - no API available.
+
+Mainly the application is targetted at android platform. However, could be build on desktop, Ubuntu 23.04 tested. 
+
 # Setup
+
+How to install and setup KAWAG project.
+
+## Desktop (Ubuntu 23.04)
 
 * Create python venv
     ```
@@ -7,27 +17,36 @@
 
 * Activate venv
     ```
-    source ./kivy_venv/bin/activate
+    source ./venv/bin/activate
     ```
 
 * Install requirements
-    > kivy issue with python 3.11 fixed! (https://github.com/kivy/kivy/issues/8042)
 
     ```
-    pip3 install -r requirements.txt
+    pip install -r requirements.txt
     ```
+
 
 * Install google chromedriver for selenium - works,  mozilla has issues with snapd
-## 1. Android Setup
+## Android Setup
 
-Guide:
+Official guide available at:
 https://kivy.org/doc/stable/guide/packaging-android.html
 
-Python for android: 
-https://python-for-android.readthedocs.io/en/latest/quickstart/
 
+### Build on Ubuntu
 
-### Debug
+* package requirements
+    ```
+    sudo apt update
+    sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+    ```
+* buildozer android command for build, deploy to mobile
+    ```
+    buildozer android debug deploy run
+    ```
+
+### Debug on Ubuntu
 
 ```
 buildozer -v android debug
