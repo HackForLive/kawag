@@ -3,9 +3,8 @@ kivymd
 bs4
 requests-html
 pylint
-python-for-android
 buildozer
 Cython==0.29.33
-setuptools
 jnius
 plyer
+schedule

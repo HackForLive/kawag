@@ -19,10 +19,10 @@ source.include_exts = py,png,jpg,kv,atlas,ini
 #source.include_patterns = assets/*,images/*.png
 
 # (list) Source files to exclude (let empty to not exclude anything)
-#source.exclude_exts = spec
+source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-#source.exclude_dirs = tests, bin, venv
+source.exclude_dirs = tests, bin, venv
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,kivymd,sqlite3,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml,beautifulsoup4,jnius,plyer,android
+requirements = python3,kivy,kivymd,sqlite3,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml,beautifulsoup4,jnius,plyer,android,schedule
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -55,7 +55,8 @@ orientation = portrait
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
-services = Notification:src/notification/service.py
+#services = handletask:src/notification/notification_service.py:foreground
+services = notification:src/notification/notification_service.py:foreground:sticky
 
 #
 # OSX Specific
@@ -97,7 +98,7 @@ fullscreen = 0
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
 #android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
-android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTERNAL_STORAGE
+android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTERNAL_STORAGE, android.permission.FOREGROUND_SERVICE, android.permission.FOREGROUND
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
@@ -158,7 +159,7 @@ android.api = 30
 
 # (str) Full name including package path of the Java class that implements Python Service
 # use that parameter to set custom Java class which extends PythonService
-#android.service_class_name = org.kivy.android.PythonService
+android.service_class_name = org.kivy.android.PythonService
 
 # (str) Android app theme, default is ok for Kivy-based app
 # android.apptheme = "@android:style/Theme.NoTitleBar"
@@ -180,7 +181,7 @@ android.api = 30
 
 # (list) List of Java files to add to the android project (can be java or a
 # directory containing the files)
-#android.add_src =
+android.add_src = src/java
 
 # (list) Android AAR archives to add
 #android.add_aars =
@@ -286,7 +287,7 @@ android.api = 30
 
 # (list) The Android archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 # In past, was `android.arch` as we weren't supporting builds for multiple archs at the same time.
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing

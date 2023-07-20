@@ -53,3 +53,9 @@ buildozer -v android debug
 adb install -r bin/*.apk
 adb logcat -s "python"
 ```
+
+### Auto Restart Service
+
+https://github.com/kivy/python-for-android/pull/1374
+https://github.com/kivy/python-for-android/pull/643
+https://habr.com/ru/articles/694906/

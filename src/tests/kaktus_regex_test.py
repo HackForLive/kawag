@@ -26,7 +26,9 @@ class TestKaktusRegex(unittest.TestCase):
                 "mezi 2 - 5 kilama a smlsni si na dvojnásobnym kreditu. \uD83E\uDD60",
             "Postačí, když si dneska 26. 10. dobiješ mezi 18. a 20. hodinou za 2 až 5 kil, tak" +
                 " datování, zprávám i volání můžeš dát pěkně do těla. \uD83C\uDF35 Sdílet " +
-                "na Facebooku"
+                "na Facebooku",
+            "Stačí dnes 11. 7. naladit 200 - 500 kaček mezi 16 a 19 hodinou a Kaktus ti nabrnkne" + 
+            " 2x takovej nářez.🔥"
         ]
         self.dates_expected = [
             (20, 4),
