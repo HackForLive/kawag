@@ -9,6 +9,8 @@ import android.provider.Settings;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.test.myapp.ServiceHandletask;
+
 public class TaskReceiver extends BroadcastReceiver {
 
     // The onReceive method will start the service defined in the buildozer.spec file
@@ -18,12 +20,13 @@ public class TaskReceiver extends BroadcastReceiver {
         Bundle extras = intent.getExtras();
         String argument = extras.getString("pythonServiceArgument");
         Log.i("python", argument);
-        Log.i("python", "-------------------- receiver");
+        Log.i("python", "-------------------- receiver (before)");
         /*
             The ServiceHandleTask class corresponds to the class defined in the the buildozer.spec file as:
                 services = handletask:tasks.py
         */
-       // service start
-        // ServiceHandletask.start(context, argument);
+        // service start
+        ServiceHandletask.start(context, "");
+         Log.i("python", "-------------------- receiver (after)");
     }
 }

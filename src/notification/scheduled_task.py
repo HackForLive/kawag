@@ -24,7 +24,7 @@ def convert_time_to_millis(time: datetime):
     return int(time.timestamp() * 1000)
 
 
-def schedule_task(seconds_to_repeat: int, title='bla', message='blabla'):
+def schedule_task(minutes: int, title='bla', message='blabla'):
     """
     Schedules a task by calling the schedule task method of the TaskScheduler class
     The task itself is to run a service defined in the buildozer.spec file
@@ -38,4 +38,4 @@ def schedule_task(seconds_to_repeat: int, title='bla', message='blabla'):
 
 
     task_scheduler = TaskScheduler(python_activity)
-    task_scheduler.scheduleTask(seconds_to_repeat, json.dumps(task_details))
+    task_scheduler.scheduleTask(minutes, json.dumps(task_details))

@@ -3,15 +3,9 @@ import os
 import configparser
 
 from kivy.lang import Builder
-from kivy.utils import platform
 from kivymd.app import MDApp
 
 from src.db.manager import SqlLiteManager
-
-if platform == 'android':
-    from src.notification.notification_service import init
-    init()
-
 
 config = configparser.ConfigParser()
 config.read(Path(__file__).parent.joinpath('config.ini'))
@@ -22,6 +16,8 @@ class Kaktus(MDApp):
         self.db_manager = SqlLiteManager(db_file=(Path(__file__).parent).joinpath(
             config['DEFAULT']['DB_NAME']))
         self.db_manager.create_notification_table()
+        from src.notification.scheduled_task import schedule_task
+        schedule_task(minutes=2)
 
     def build(self):
         self.theme_cls.theme_style = "Dark"

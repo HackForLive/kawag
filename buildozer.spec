@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,kivymd,sqlite3,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml,beautifulsoup4,jnius,plyer,android,schedule
+requirements = python3,kivy,kivymd,sqlite3,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml,beautifulsoup4,jnius,plyer,android
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -55,8 +55,8 @@ orientation = portrait
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
-#services = handletask:src/notification/notification_service.py:foreground
-services = notification:src/notification/notification_service.py:foreground:sticky
+services = handletask:src/notification/handle_task.py:foreground
+#services = notification:src/notification/notification_service.py:foreground:sticky
 
 #
 # OSX Specific

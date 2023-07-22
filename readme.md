@@ -59,3 +59,12 @@ adb logcat -s "python"
 https://github.com/kivy/python-for-android/pull/1374
 https://github.com/kivy/python-for-android/pull/643
 https://habr.com/ru/articles/694906/
+
+
+## Adhoc
+
+```
+buildozer android debug deploy run
+/home/michael/.buildozer/android/platform/android-sdk/platform-tools/adb logcat -s "python"
+/home/michael/.buildozer/android/platform/android-sdk/platform-tools/adb logcat org.test.myapp
+```

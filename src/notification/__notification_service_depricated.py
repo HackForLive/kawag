@@ -44,11 +44,10 @@ def get_kaktus_latest():
     return soup.find('div', {'class': 'box-bubble'}).find_all('p')[0].text
 
 
-if __name__ == '__main__':
-    schedule.every(2).minutes.do(trigger_kaktus)
-    config = configparser.ConfigParser()
-    config.read(Path(__file__).parent.parent.parent.joinpath('config.ini'))
+# schedule.every(2).minutes.do(trigger_kaktus)
+config = configparser.ConfigParser()
+config.read(Path(__file__).parent.parent.parent.joinpath('config.ini'))
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+while True:
+    schedule.run_pending()
+    time.sleep(1)

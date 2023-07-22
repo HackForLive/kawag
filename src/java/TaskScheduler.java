@@ -17,7 +17,7 @@ public class TaskScheduler{
     }
 
     // This method will be called from python hence scheduling the task at a specific time
-    public void scheduleTask(int seconds, String taskArgument){
+    public void scheduleTask(int minutes, String taskArgument){
         Log.i("python", "-------------------- scheduling");
         Log.i("python", taskArgument);
         AlarmManager alarmManager = (AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
@@ -28,8 +28,9 @@ public class TaskScheduler{
         // the task taskArgument is a string that will be retrieved by our TaskReceiver class and passed on to the
         // service. This is will then be made available to the python file via an environment variable by kivy
         intent.putExtra("pythonServiceArgument", taskArgument);
+        long repeatInterval = 60000L; // 1 minute
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), repeatInterval * minutes, pendingIntent);
     }
 }
