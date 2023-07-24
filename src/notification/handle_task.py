@@ -14,13 +14,51 @@ def trigger_kaktus():
     text = get_kaktus_latest()
     notify(title='test', msg=text)
 
+def send_notification(title: str, message: str):
+    """
+    Alternative to plyer
+    """
+    from jnius import autoclass
+    channel: str = 'kawag_01'
+    Context = autoclass('android.content.Context')
+    # AndroidString = autoclass('java.lang.String')
+    service = autoclass('org.kivy.android.PythonService').mService
+
+    notification_service = service.getSystemService(
+        Context.NOTIFICATION_SERVICE)
+    NotificationBuilder = autoclass('android.app.Notification$Builder')
+    NotificationChannel = autoclass('android.app.NotificationChannel')
+    Drawable = autoclass('org.test.myapp.R$drawable')
+    Logger.info(dir(Drawable))
+    icon = Drawable.ic_launcher
+    app_context = service.getApplication().getApplicationContext()
+    notification_builder = NotificationBuilder(app_context, channel)
+    notification_builder.setContentTitle(title)
+    notification_builder.setContentText(message)
+    notification_builder.setSmallIcon(icon)
+    notification_builder.setAutoCancel(True)
+    new_notification = notification_builder.getNotification()
+
+    notification_service.createNotificationChannel(
+        NotificationChannel(
+            channel, "notificationWorker", 3 #NotificationManager.IMPORTANCE_DEFAULT
+        )
+    )
+    notification_service.notify(0, new_notification)
+
+
 def notify(title: str, msg: str) -> None:
     """
     Push notification with title and msg
     :param title: notification title
     :param msg: notification message
     """
-    plyer.notification.notify(title=title, message=msg)
+    # from plyer.platforms.android import notification
+    # PlyerNotification = notification.instance()
+    
+    # PlyerNotification.notify(title = "NOTIFY from Service", message = "Hello!")
+    send_notification(title=title, message=msg)
+    # plyer.notification.notify(title=title, message=msg, ticker='ticker', toast=True)
     Logger.info("push notification sent")
 
 def get_kaktus_latest():

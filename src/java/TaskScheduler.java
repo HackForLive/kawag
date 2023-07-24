@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.AlarmManager;
 import android.util.Log;
 
+import org.test.myapp.ServiceHandletask;
 
 public class TaskScheduler{
     Context appContext;
@@ -32,5 +33,6 @@ public class TaskScheduler{
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), repeatInterval * minutes, pendingIntent);
+        Log.i("python", "-------------------- scheduled");
     }
 }

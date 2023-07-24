@@ -20,13 +20,15 @@ public class TaskReceiver extends BroadcastReceiver {
         Bundle extras = intent.getExtras();
         String argument = extras.getString("pythonServiceArgument");
         Log.i("python", argument);
-        Log.i("python", "-------------------- receiver (before)");
+        Log.i("python", "on receive (before)");
         /*
             The ServiceHandleTask class corresponds to the class defined in the the buildozer.spec file as:
                 services = handletask:tasks.py
         */
         // service start
-        ServiceHandletask.start(context, "");
-         Log.i("python", "-------------------- receiver (after)");
+        // ServiceHandletask.start(context, "");
+        Intent intentS = ServiceHandletask.getDefaultIntent(context, "", "My Application", "Handletask", "");
+        context.startForegroundService(intentS);
+        Log.i("python", "on receive (after)");
     }
 }

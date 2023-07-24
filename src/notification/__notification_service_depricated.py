@@ -16,7 +16,7 @@ if platform == 'android':
 def init():
     if platform == 'android':
         package_name='org.test.myapp'
-        service_name='Notification'
+        service_name='Notificationtask'
         s_name = f'{package_name}.Service{service_name}'
         service = autoclass(s_name)
         m_activity = autoclass('org.kivy.android.PythonActivity').mActivity
