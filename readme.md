@@ -45,6 +45,10 @@ https://kivy.org/doc/stable/guide/packaging-android.html
     ```
     buildozer android debug deploy run
     ```
+* apply android manifest change (force rebuilt the buildozer, add new python package suffice to buildozer requirements however not ideal)
+    ```
+    python3 ./maintenance/android_manifest_for_broadcast.py
+    ```
 
 ### Debug on Ubuntu
 

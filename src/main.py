@@ -1,12 +1,11 @@
 from pathlib import Path
-import os
 import configparser
 
 from kivy.lang import Builder
 from kivy.utils import platform
 from kivymd.app import MDApp
 
-from src.db.manager import SqlLiteManager
+from db.manager import SqlLiteManager
 
 config = configparser.ConfigParser()
 config.read(Path(__file__).parent.joinpath('config.ini'))
@@ -18,7 +17,7 @@ class Kaktus(MDApp):
             config['DEFAULT']['DB_NAME']))
         self.db_manager.create_notification_table()
         if platform == 'android':
-            from src.notification.scheduled_task import schedule_task
+            from notification.scheduled_task import schedule_task
             schedule_task(minutes=2)
 
     def build(self):
@@ -26,7 +25,7 @@ class Kaktus(MDApp):
         self.theme_cls.primary_palette = "Orange"
         self.db_manager.create_connection()
 
-        return Builder.load_file(os.path.join('src', 'kaktus.kv'))
+        return Builder.load_file('kaktus.kv')
 
     def submit(self):
         text = self.root.ids.word_input.text

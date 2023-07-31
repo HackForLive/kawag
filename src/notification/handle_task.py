@@ -2,12 +2,15 @@ import configparser
 import os
 from pathlib import Path
 
-import plyer
+# not used as problematic
+# import plyer
 
 from kivy.logger import Logger
-from bs4 import BeautifulSoup
 from kivy.utils import platform
+from bs4 import BeautifulSoup
 from requests_html import HTMLSession
+
+from db.manager import SqlLiteManager
 
 
 def trigger_kaktus():
@@ -53,10 +56,7 @@ def notify(title: str, msg: str) -> None:
     :param title: notification title
     :param msg: notification message
     """
-    # from plyer.platforms.android import notification
-    # PlyerNotification = notification.instance()
-    
-    # PlyerNotification.notify(title = "NOTIFY from Service", message = "Hello!")
+
     send_notification(title=title, message=msg)
     # plyer.notification.notify(title=title, message=msg, ticker='ticker', toast=True)
     Logger.info("push notification sent")
@@ -70,10 +70,14 @@ def get_kaktus_latest():
 
 if __name__ == '__main__':
     config = configparser.ConfigParser()
-    config.read(Path(__file__).parent.parent.parent.joinpath('config.ini'))
+    Logger.info(Path(__file__).parent.parent.joinpath('config.ini'))
+    config.read(Path(__file__).parent.parent.joinpath('config.ini'))
+
+    db_manager = SqlLiteManager(db_file=(Path(__file__).parent.parent).joinpath(
+            config['DEFAULT']['DB_NAME']))
 
     received_argument = os.getenv("PYTHON_SERVICE_ARGUMENT")
-    Logger.info('Tasks: argument passed to python: {0}'.format(received_argument))
+    Logger.info('Tasks: argument passed to python: %s', received_argument)
 
     if platform == 'android':
         trigger_kaktus()

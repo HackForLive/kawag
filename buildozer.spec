@@ -10,7 +10,7 @@ package.name = myapp
 package.domain = org.test
 
 # (str) Source code where the main.py live
-source.dir = .
+source.dir = ./src
 
 # (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas,ini
@@ -55,8 +55,7 @@ orientation = portrait
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
-services = handletask:src/notification/handle_task.py:foreground
-#services = notificationtask:src/notification/notification_service.py:foreground:sticky
+services = handletask:notification/handle_task.py:foreground
 
 #
 # OSX Specific

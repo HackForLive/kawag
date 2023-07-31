@@ -25,8 +25,9 @@ public class TaskReceiver extends BroadcastReceiver {
             The ServiceHandleTask class corresponds to the class defined in the the buildozer.spec file as:
                 services = handletask:tasks.py
         */
-        // service start
+        // service start - do not work due to permission 
         // ServiceHandletask.start(context, "");
+        // rewritten logic for service start in foreground
         Intent intentS = ServiceHandletask.getDefaultIntent(context, "", "My Application", "Handletask", "");
         context.startForegroundService(intentS);
         Log.i("python", "on receive (after)");
