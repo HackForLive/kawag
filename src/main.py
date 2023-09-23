@@ -5,7 +5,7 @@ from kivy.lang import Builder
 from kivy.utils import platform
 from kivymd.app import MDApp
 
-from db.manager import SqlLiteManager
+from db.db_engine import DbEngine
 
 config = configparser.ConfigParser()
 config.read(Path(__file__).parent.joinpath('config.ini'))
@@ -13,35 +13,32 @@ config.read(Path(__file__).parent.joinpath('config.ini'))
 class Kaktus(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.db_manager = SqlLiteManager(db_file=(Path(__file__).parent).joinpath(
-            config['DEFAULT']['DB_NAME']))
-        self.db_manager.create_notification_table()
         if platform == 'android':
             from notification.scheduled_task import schedule_task
             schedule_task(minutes=2)
 
+        self._db_engine = DbEngine(db_file_path=(Path(__file__).parent).joinpath(config['DEFAULT']['DB_NAME']))
+
     def build(self):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Orange"
-        self.db_manager.create_connection()
 
         return Builder.load_file('kaktus.kv')
 
     def submit(self):
         text = self.root.ids.word_input.text
-        self.db_manager.insert_new_record(notification=text)
+        self._db_engine.create_notification(text)
         # Add a little message
         self.root.ids.word_label.text = f'{text} Added'
         # Clear the input box
         self.root.ids.word_input.text = ''
 
     def show_records(self):
-        records = self.db_manager.get_all_record()
+        messages = [record.message for record in self._db_engine.get_all_notifications()]
 
         word = ''
-        # Loop thru records
-        for record in records:
-            word = f'{word}\n{record[0]}'
+        for message in messages:
+            word = f'{word}\n{message}'
             self.root.ids.word_label.text = f'{word}'
 
 if __name__ == "__main__":

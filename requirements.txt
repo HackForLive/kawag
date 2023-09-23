@@ -8,4 +8,4 @@ Cython==0.29.33
 jnius
 plyer
 schedule
-sqlalchemy
+sqlalchemy==1.4.49

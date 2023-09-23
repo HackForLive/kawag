@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,kivymd,sqlite3,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml,beautifulsoup4,jnius,plyer,android,schedule
+requirements = python3,kivy,kivymd,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml,beautifulsoup4,jnius,plyer,android,schedule,typing-extensions,sqlalchemy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
