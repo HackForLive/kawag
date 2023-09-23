@@ -1,10 +1,12 @@
 {
     "python.defaultInterpreterPath": "/home/michael/git/kawag/venv/bin/python3",
     "pylint.path": ["/home/michael/git/kawag/venv/bin/pylint"],
-    "python.linting.pylintArgs": [
+    "pylint.args": [
         "--reports", "yes", 
         "--disable", "I0011",
         "--disable", "C0114",
         "--disable", "C0115",
-        "--disable", "C0116"],
+        "--disable", "C0116"
+    ],
+    "editor.rulers": [100]
 }

@@ -17,7 +17,8 @@ class Kaktus(MDApp):
             from notification.scheduled_task import schedule_task
             schedule_task(minutes=2)
 
-        self._db_engine = DbEngine(db_file_path=(Path(__file__).parent).joinpath(config['DEFAULT']['DB_NAME']))
+        self._db_engine = DbEngine(
+            db_file_path=(Path(__file__).parent).joinpath(config['DEFAULT']['DB_NAME']))
 
     def build(self):
         self.theme_cls.theme_style = "Dark"
