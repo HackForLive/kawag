@@ -3,9 +3,19 @@ from pathlib import Path
 
 manifest_path = os.path.join(
     Path(os.path.dirname(os.path.abspath(__file__))).parent,
-    '.buildozer/android/platform/python-for-android/pythonforandroid/bootstraps/sdl2/build/' + 
+    '.buildozer/android/platform/build-arm64-v8a/dists/myapp/' + 
     'templates/AndroidManifest.tmpl.xml'
 )
+
+
+# ./.buildozer/android/platform/python-for-android/pythonforandroid/bootstraps/sdl2/build/templates/AndroidManifest.tmpl.xml
+# ./.buildozer/android/platform/python-for-android/pythonforandroid/bootstraps/service_library/build/templates/AndroidManifest.tmpl.xml
+# ./.buildozer/android/platform/python-for-android/pythonforandroid/bootstraps/service_only/build/templates/AndroidManifest.tmpl.xml
+# ./.buildozer/android/platform/python-for-android/pythonforandroid/bootstraps/webview/build/templates/AndroidManifest.tmpl.xml
+# ./.buildozer/android/platform/build-arm64-v8a/build/bootstrap_builds/sdl2/templates/AndroidManifest.tmpl.xml
+# ./.buildozer/android/platform/build-arm64-v8a/dists/myapp/templates/AndroidManifest.tmpl.xml
+
+
 print(manifest_path)
 
 RECEIVER_STRING = """

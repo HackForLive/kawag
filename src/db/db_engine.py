@@ -1,8 +1,8 @@
 from typing import List
+from datetime import datetime, date
 
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy import create_engine, desc, select
+from sqlalchemy.orm import sessionmaker
 
 from db.model.notification import Notification, base
 
@@ -19,11 +19,19 @@ class DbEngine:
         :param msg: message
         """
         session = self._session()
-        notification = Notification(message=msg)
+        notification = Notification(message=msg, created_at=datetime.utcnow())
         session.add(notification)
         session.commit()
         session.close()
 
-    def get_all_notifications(self) -> List[Notification]:
+    # def get_notification_by_date(self, date_param: date) -> Notification:
+    #     session = self._session()
+    #     record = session.query(Notification).filter(
+    #         Notification.created_at == date_param
+    #         ).first()
+    #     return record
+
+    def get_latest_notification(self) -> Notification:
         session = self._session()
-        return session.query(Notification).all()
+        res = session.query(Notification).order_by(Notification.created_at.desc()).all()
+        return res[0] if res else None

@@ -1,6 +1,7 @@
 import configparser
 import os
 from pathlib import Path
+from datetime import datetime
 
 # not used as problematic
 # import plyer
@@ -10,11 +11,10 @@ from kivy.utils import platform
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 
-from db.manager import SqlLiteManager
+from db.db_engine import DbEngine
 
 
-def trigger_kaktus():
-    text = get_kaktus_latest()
+def trigger_kaktus(text: str):
     notify(title='test', msg=text)
 
 def send_notification(title: str, message: str):
@@ -73,11 +73,31 @@ if __name__ == '__main__':
     Logger.info(Path(__file__).parent.parent.joinpath('config.ini'))
     config.read(Path(__file__).parent.parent.joinpath('config.ini'))
 
-    db_manager = SqlLiteManager(db_file=(Path(__file__).parent.parent).joinpath(
-            config['DEFAULT']['DB_NAME']))
+    db_engine = DbEngine(
+            db_file_path=(Path(__file__).parent).joinpath(config['DEFAULT']['DB_NAME']))
 
     received_argument = os.getenv("PYTHON_SERVICE_ARGUMENT")
     Logger.info('Tasks: argument passed to python: %s', received_argument)
 
+    should_trigger: bool = False
+    message = get_kaktus_latest()
+
+    latest = db_engine.get_latest_notification()
+    
+    print(message)
+    print(latest)
+    if not latest:
+        db_engine.create_notification(msg=message)
+        should_trigger = True
+    elif latest.message != message:
+        db_engine.create_notification(msg=message)
+        should_trigger = True
+    else:
+        should_trigger = False
+
+    print(should_trigger)
+    
+    db_engine.create_notification(msg=message)
+
     if platform == 'android':
-        trigger_kaktus()
+        trigger_kaktus(text=message)

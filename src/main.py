@@ -28,19 +28,18 @@ class Kaktus(MDApp):
 
     def submit(self):
         text = self.root.ids.word_input.text
-        self._db_engine.create_notification(text)
+        self._db_engine.create_notification(msg=text)
         # Add a little message
         self.root.ids.word_label.text = f'{text} Added'
         # Clear the input box
         self.root.ids.word_input.text = ''
 
-    def show_records(self):
-        messages = [record.message for record in self._db_engine.get_all_notifications()]
-
-        word = ''
-        for message in messages:
-            word = f'{word}\n{message}'
-            self.root.ids.word_label.text = f'{word}'
+    def show_latest_records(self):
+        latest = self._db_engine.get_latest_notification()
+        if latest:
+            self.root.ids.word_label.text = latest.message
+        else:
+            self.root.ids.word_label.text = ''
 
 if __name__ == "__main__":
     Kaktus().run()
