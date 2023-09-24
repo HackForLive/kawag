@@ -5,7 +5,7 @@ note: export PYTHONPATH, e.g. # [print(msg.encode('utf-16', 'surrogatepass').dec
 
 """
 import unittest
-from kaktus_regex import find_date, find_hour_range
+from src.kaktus_regex import find_date, find_hour_range
 
 
 class TestKaktusRegex(unittest.TestCase):
@@ -36,7 +36,8 @@ class TestKaktusRegex(unittest.TestCase):
             (21, 6),
             (11, 1),
             (9, 6),
-            (26, 10)
+            (26, 10),
+            (11, 7)
         ]
         self.hours_expected = [
             (18, 21),
@@ -44,7 +45,8 @@ class TestKaktusRegex(unittest.TestCase):
             (17, 19),
             (16, 19),
             (17, 20),
-            (18, 20)
+            (18, 20),
+            (16, 19)
         ]
         # [print(msg.encode('utf-16', 'surrogatepass').decode('utf-16')) for msg in self.messages]
 

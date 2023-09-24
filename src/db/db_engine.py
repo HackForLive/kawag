@@ -34,4 +34,5 @@ class DbEngine:
     def get_latest_notification(self) -> Notification:
         session = self._session()
         res = session.query(Notification).order_by(Notification.created_at.desc()).all()
+        session.close()
         return res[0] if res else None

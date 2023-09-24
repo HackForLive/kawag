@@ -10,7 +10,7 @@ class Notification(base):
     __tablename__ = 'notification'
     id = Column(Integer, primary_key=True)
     # message: Mapped[str] = mapped_column(String(100))
-    message = Column(String(100))
+    message = Column(String(length=200))
     created_at = Column(DateTime)
 
     def __repr__(self) -> str:

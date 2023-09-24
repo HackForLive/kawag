@@ -74,7 +74,7 @@ if __name__ == '__main__':
     config.read(Path(__file__).parent.parent.joinpath('config.ini'))
 
     db_engine = DbEngine(
-            db_file_path=(Path(__file__).parent).joinpath(config['DEFAULT']['DB_NAME']))
+            db_file_path=(Path(__file__).parent.parent).joinpath(config['DEFAULT']['DB_NAME']))
 
     received_argument = os.getenv("PYTHON_SERVICE_ARGUMENT")
     Logger.info('Tasks: argument passed to python: %s', received_argument)
@@ -84,8 +84,6 @@ if __name__ == '__main__':
 
     latest = db_engine.get_latest_notification()
     
-    print(message)
-    print(latest)
     if not latest:
         db_engine.create_notification(msg=message)
         should_trigger = True

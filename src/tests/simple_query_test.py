@@ -1,9 +1,10 @@
 import configparser
+from pathlib import Path
 
 from requests_html import HTMLSession
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read(Path(__file__).parent.parent.joinpath('config.ini'))
 
 session = HTMLSession()
 

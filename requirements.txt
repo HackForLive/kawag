@@ -9,3 +9,5 @@ jnius
 plyer
 schedule
 sqlalchemy==1.3.3
+pytest
+selenium
