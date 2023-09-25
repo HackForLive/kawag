@@ -18,10 +18,8 @@ class Kaktus(MDApp):
             schedule_task(minutes=2)
 
         self._db_engine = DbEngine(
-            db_file_path=(Path(__file__).parent).joinpath(config['DEFAULT']['DB_NAME']))
-        print('-----------------')
-        print(Path(__file__).parent.joinpath(config['DEFAULT']['DB_NAME']))
-        print('-----------------')
+        sql_connection_str=
+        f"sqlite:///{(Path(__file__).parent).joinpath(config['DEFAULT']['DB_NAME'])}")
 
     def build(self):
         self.theme_cls.theme_style = "Dark"

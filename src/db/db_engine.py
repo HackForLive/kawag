@@ -1,14 +1,14 @@
-from typing import List
-from datetime import datetime, date
+from datetime import datetime
 
-from sqlalchemy import create_engine, desc, select
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from db.model.notification import Notification, base
 
+
 class DbEngine:
-    def __init__(self, db_file_path) -> None:
-        self._engine = create_engine(f"sqlite:///{db_file_path}", echo=True)
+    def __init__(self, sql_connection_str: str) -> None:
+        self._engine = create_engine(sql_connection_str, echo=True)
 
         # create db and tables
         base.metadata.create_all(self._engine)

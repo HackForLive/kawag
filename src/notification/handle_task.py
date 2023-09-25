@@ -1,7 +1,6 @@
 import configparser
 import os
 from pathlib import Path
-from datetime import datetime
 
 # not used as problematic
 # import plyer
@@ -74,28 +73,19 @@ if __name__ == '__main__':
     config.read(Path(__file__).parent.parent.joinpath('config.ini'))
 
     db_engine = DbEngine(
-            db_file_path=(Path(__file__).parent.parent).joinpath(config['DEFAULT']['DB_NAME']))
+        sql_connection_str=
+        f"sqlite:///{(Path(__file__).parent.parent).joinpath(config['DEFAULT']['DB_NAME'])}")
 
     received_argument = os.getenv("PYTHON_SERVICE_ARGUMENT")
     Logger.info('Tasks: argument passed to python: %s', received_argument)
 
-    should_trigger: bool = False
     message = get_kaktus_latest()
 
     latest = db_engine.get_latest_notification()
-    
-    if not latest:
-        db_engine.create_notification(msg=message)
-        should_trigger = True
-    elif latest.message != message:
-        db_engine.create_notification(msg=message)
-        should_trigger = True
-    else:
-        should_trigger = False
 
-    print(should_trigger)
-    
+    if not latest or latest.message != message:
+        db_engine.create_notification(msg=message)
+        if platform == 'android':
+            trigger_kaktus(text=message)
+
     db_engine.create_notification(msg=message)
-
-    if platform == 'android':
-        trigger_kaktus(text=message)
