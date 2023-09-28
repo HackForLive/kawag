@@ -1,8 +1,8 @@
 """
 A simple regex test example for kaktus watch dog notifications
 
-note: export PYTHONPATH, e.g. # [print(msg.encode('utf-16', 'surrogatepass').decode('utf-16')) for msg in messages]
-
+note: export PYTHONPATH, 
+e.g. [print(msg.encode('utf-16', 'surrogatepass').decode('utf-16')) for msg in messages]
 """
 import unittest
 from src.kaktus_regex import find_date, find_hour_range
@@ -28,7 +28,13 @@ class TestKaktusRegex(unittest.TestCase):
                 " datování, zprávám i volání můžeš dát pěkně do těla. \uD83C\uDF35 Sdílet " +
                 "na Facebooku",
             "Stačí dnes 11. 7. naladit 200 - 500 kaček mezi 16 a 19 hodinou a Kaktus ti nabrnkne" + 
-            " 2x takovej nářez.🔥"
+            " 2x takovej nářez.🔥",
+            "Dobij si dnes 19. 9. mezi 17 a 20 hodinou 200 - 500 korun a získej dvojitou nálož " + 
+            "kreditu 💸, než tahle past sklapne.",
+            "Dobij dnes 13. 9. mezi 17 a 19 hodinou 200 až 500 Kč a my ti nasolíme 🧂 tuplovanou" +
+            " sumu, ani nemrkneš. 🦾🌵",
+            "Podráždi ho 2 až 5 stovkama dneska 21. 8. mezi 16 a 18 hodinou a my už ti píchnem," +
+            " aby byl 2x takovej. 🐝"
         ]
         self.dates_expected = [
             (20, 4),
@@ -37,7 +43,10 @@ class TestKaktusRegex(unittest.TestCase):
             (11, 1),
             (9, 6),
             (26, 10),
-            (11, 7)
+            (11, 7),
+            (19, 9),
+            (13, 9),
+            (21, 8)
         ]
         self.hours_expected = [
             (18, 21),
@@ -46,7 +55,10 @@ class TestKaktusRegex(unittest.TestCase):
             (16, 19),
             (17, 20),
             (18, 20),
-            (16, 19)
+            (16, 19),
+            (17, 20),
+            (17, 19),
+            (16, 18)
         ]
         # [print(msg.encode('utf-16', 'surrogatepass').decode('utf-16')) for msg in self.messages]
 
