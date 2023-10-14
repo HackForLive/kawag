@@ -35,4 +35,17 @@ public class TaskScheduler{
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), repeatInterval * minutes, pendingIntent);
         Log.i("python", "-------------------- scheduled");
     }
+
+    // public void cancelTask(){
+    //     Log.i("python", "-------------------- cancel scheduling");
+    //     Log.i("python", taskArgument);
+    //     AlarmManager alarmManager = (AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
+
+    //     // The TaskReceiver class is the BroadcastReceiver set to handle the task when it is fired
+    //     Intent intent = new  Intent(appContext, TaskReceiver.class);
+
+    //     PendingIntent pendingIntent = PendingIntent.getBroadcast(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    //     alarmManager.cancel(pendingIntent);
+    //     Log.i("python", "-------------------- cancelled");
+    // }
 }

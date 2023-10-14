@@ -15,7 +15,7 @@ class Kaktus(MDApp):
         super().__init__(**kwargs)
         if platform == 'android':
             from notification.scheduled_task import schedule_task
-            schedule_task(minutes=2)
+            schedule_task(minutes=20)
 
         self._db_engine = DbEngine(
         sql_connection_str=

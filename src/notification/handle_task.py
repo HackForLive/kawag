@@ -87,5 +87,6 @@ if __name__ == '__main__':
         db_engine.create_notification(msg=message)
         if platform == 'android':
             trigger_kaktus(text=message)
-
-    db_engine.create_notification(msg=message)
+    else:
+        if platform == 'android':
+            trigger_kaktus(text='Nothing - debug')
