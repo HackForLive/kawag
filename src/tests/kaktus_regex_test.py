@@ -34,7 +34,9 @@ class TestKaktusRegex(unittest.TestCase):
             "Dobij dnes 13. 9. mezi 17 a 19 hodinou 200 až 500 Kč a my ti nasolíme 🧂 tuplovanou" +
             " sumu, ani nemrkneš. 🦾🌵",
             "Podráždi ho 2 až 5 stovkama dneska 21. 8. mezi 16 a 18 hodinou a my už ti píchnem," +
-            " aby byl 2x takovej. 🐝"
+            " aby byl 2x takovej. 🐝",
+            "Stačí si dneska 12. 10. dobít 2 až 5 stovek mezi 16. a 19. hodinou a vytasit pořádný" +
+            " eso v podobě ✌🏻 dvojitýho kreditu."
         ]
         self.dates_expected = [
             (20, 4),
@@ -46,7 +48,8 @@ class TestKaktusRegex(unittest.TestCase):
             (11, 7),
             (19, 9),
             (13, 9),
-            (21, 8)
+            (21, 8),
+            (12, 10)
         ]
         self.hours_expected = [
             (18, 21),
@@ -58,7 +61,8 @@ class TestKaktusRegex(unittest.TestCase):
             (16, 19),
             (17, 20),
             (17, 19),
-            (16, 18)
+            (16, 18),
+            (16, 19)
         ]
         # [print(msg.encode('utf-16', 'surrogatepass').decode('utf-16')) for msg in self.messages]
 
