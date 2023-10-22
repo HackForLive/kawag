@@ -1,4 +1,4 @@
-from sqlalchemy import String, Integer, Column, DateTime
+from sqlalchemy import String, Integer, Column, DateTime, Boolean
 # from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -15,3 +15,11 @@ class Notification(base):
 
     def __repr__(self) -> str:
         return f"Notification(id={self.id!r}, message={self.message!r})"
+
+class NotificationStatus(base):
+    __tablename__ = 'notification_status'
+    id = Column(Integer, primary_key=True)
+    enabled = Column(Boolean)
+
+    def __repr__(self) -> str:
+        return f"NotificationStatus(id={self.id!r}, enabled={self.enabled!r})"
