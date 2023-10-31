@@ -1,6 +1,6 @@
 {
-    "python.defaultInterpreterPath": "/home/michael/git/kawag/venv/bin/python3",
-    "pylint.path": ["/home/michael/git/kawag/venv/bin/pylint"],
+    "python.defaultInterpreterPath": "D:/git/kawag/venv/Scripts/python.exe",
+    "pylint.path": ["D:/git/kawag/venv/Sripts/pylint.exe"],
     "pylint.args": [
         "--reports", "yes", 
         "--disable", "I0011",

@@ -89,4 +89,4 @@ if __name__ == '__main__':
             trigger_kaktus(text=message)
     else:
         if platform == 'android':
-            trigger_kaktus(text='Nothing - debug')
+            trigger_kaktus(text=f"Nothing - debug{message}")
