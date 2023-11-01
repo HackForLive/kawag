@@ -2,73 +2,91 @@
 
 The project aims at getting information about special double credit offer from Kaktus mobile operator. The information is available at website https://www.mujkaktus.cz/chces-pridat where the information is published in human readable format - no API available.
 
-Mainly the application is targetted at android platform. However, could be build on desktop, Ubuntu 23.04 tested. 
+Mainly the application is targetted at android platform. However, could be build on desktop, limited to Linux and WSL due to buildozer(p4a). 
 
 # Setup
 
 How to install and setup KAWAG project.
 
-## Desktop (Ubuntu 23.04)
+## Ubuntu Setup (Ubuntu 23.04)
 
-* Create python venv
+
+### Desktop Application
+* Bootstrap python venv
     ```
     python3 -m venv venv
-    ```
-
-* Activate venv
-    ```
     source ./venv/bin/activate
-    ```
-
-* Install requirements
-
-    ```
     pip install -r requirements.txt
     ```
 
+* Run Kivy app
+    ```
+    python ./src/main.py
+    ```
 
-* Install google chromedriver for selenium - works,  mozilla has issues with snapd
-## Android Setup
+### Android Application
 
-Official guide available at:
-https://kivy.org/doc/stable/guide/packaging-android.html
+Build is using buildozer and python for android
 
-
-### Build on Ubuntu
-
+* Bootstrap python venv
+    ```
+    python3 -m venv venv
+    source ./venv/bin/activate
+    pip install -r buildozer Cython==0.29.33
+    ```
 * package requirements
     ```
     sudo apt update
     sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
     ```
-* buildozer android command for build, deploy to mobile
+* buildozer command for local android debug build
     ```
-    buildozer android debug deploy run
+    buildozer -v android debug
     ```
-* apply android manifest change (force rebuilt the buildozer, add new python package suffice to buildozer requirements however not ideal)
+* apply android manifest change (To setup broadcast and receiver written in plain java)
     ```
-    python3 ./maintenance/android_manifest_for_broadcast.py
+    python ./maintenance/android_manifest_for_broadcast.py
+    ```
+* buildozer command for deploying android local application build
+    ```
+    buildozer -v android run deploy
     ```
 
-### Debug on Ubuntu
+#### Debug on Ubuntu
 
 ```
-buildozer -v android debug
 adb install -r bin/*.apk
 adb logcat -s "python"
 ```
 
-### Auto Restart Service
+## WSL 2 Windows 11 Setup
 
-https://github.com/kivy/python-for-android/pull/1374
-https://github.com/kivy/python-for-android/pull/643
-https://habr.com/ru/articles/694906/
-
-
-## Adhoc
-
-```
-buildozer android debug deploy run
-/home/michael/.buildozer/android/platform/android-sdk/platform-tools/adb logcat -s "python"
-/home/michael/.buildozer/android/platform/android-sdk/platform-tools/adb logcat org.test.myapp
-```
+* Install WSL 2 (Ubuntu) on Windows 11
+* Install USB support on WSL 2 [usbipd-win](https://github.com/dorssel/usbipd-win).
+    
+    On WSL windows part attach USB device:
+    ```
+    usbipd wsl list
+    usbipd wsl attach --busid 1-2
+    ```
+    In WSL Ubuntu
+    ```
+    usbip list --remote=192.168.0.136
+    usbip port
+    lsusb
+    ```
+* Install buildozer (https://github.com/kivy/kivy/wiki/Using-Buildozer-on-windows-10-using-WSL)
+    ```
+    python -m venv venv
+    . ./venv/bin/activate
+    pip install buildozer
+    pip install Cython==0.29.33
+    buildozer -v android debug
+    ```
+* Setup udev rules for adb
+    ```
+    sudo vim /etc/udev/rules.d/51-android.rules
+    SUBSYSTEM=="usb", ATTR{product}=="moto g32", ATTR{serial}=="ZY22G2TM9G", MODE="0666", GROUP="plugdev"
+    sudo udevadm control --reload-rules && sudo udevadm trigger
+    ```
+    

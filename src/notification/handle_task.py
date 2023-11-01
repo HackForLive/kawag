@@ -13,8 +13,8 @@ from requests_html import HTMLSession
 from db.db_engine import DbEngine
 
 
-def trigger_kaktus(text: str):
-    notify(title='test', msg=text)
+def trigger_kaktus(title:str, text: str):
+    notify(title=title, msg=text)
 
 def send_notification(title: str, message: str):
     """
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     if not latest or latest.message != message:
         db_engine.create_notification(msg=message)
         if platform == 'android':
-            trigger_kaktus(text=message)
+            trigger_kaktus(title="It's time!", text=message)
     else:
         if platform == 'android':
-            trigger_kaktus(text=f"Nothing - debug{message}")
+            trigger_kaktus(title="Nothing yet.", text=message)
