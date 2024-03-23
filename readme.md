@@ -28,11 +28,14 @@ How to install and setup KAWAG project.
 
 Build is using buildozer and python for android
 
+* Install
 * Bootstrap python venv
     ```
+    sudo apt update
+    sudo apt install python3 python3-pip python3-venv
     python3 -m venv venv
     source ./venv/bin/activate
-    pip install -r buildozer Cython==0.29.33
+    pip3 install buildozer Cython==0.29.33
     ```
 * package requirements
     ```
@@ -49,7 +52,7 @@ Build is using buildozer and python for android
     ```
 * buildozer command for deploying android local application build
     ```
-    buildozer -v android run deploy
+    buildozer -v android debug deploy run logcat
     ```
 
 #### Debug on Ubuntu
@@ -66,15 +69,10 @@ adb logcat -s "python"
     
     On WSL windows part attach USB device:
     ```
-    usbipd wsl list
-    usbipd wsl attach --busid 1-2
+    usbipd list
+    usbipd attach --wsl --busid 1-3
     ```
-    In WSL Ubuntu
-    ```
-    usbip list --remote=192.168.0.136
-    usbip port
-    lsusb
-    ```
+    In WSL Ubuntu (no longer needed any setup)
 * Install buildozer (https://github.com/kivy/kivy/wiki/Using-Buildozer-on-windows-10-using-WSL)
     ```
     python -m venv venv
@@ -83,7 +81,7 @@ adb logcat -s "python"
     pip install Cython==0.29.33
     buildozer -v android debug
     ```
-* Setup udev rules for adb
+* ~~Setup udev rules for adb~~
     ```
     sudo vim /etc/udev/rules.d/51-android.rules
     SUBSYSTEM=="usb", ATTR{product}=="moto g32", ATTR{serial}=="ZY22G2TM9G", MODE="0666", GROUP="plugdev"
