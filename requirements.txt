@@ -1,11 +1,12 @@
 kivy[full]
 kivymd
+buildozer
 bs4
 requests-html
 pylint
 buildozer
 Cython==0.29.33
-jnius
+pyjnius
 plyer
 schedule
 sqlalchemy==1.3.3

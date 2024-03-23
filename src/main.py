@@ -4,18 +4,27 @@ import configparser
 from kivy.lang import Builder
 from kivy.utils import platform
 from kivymd.app import MDApp
+from kivymd.uix.behaviors.toggle_behavior import MDToggleButton
+from kivymd.uix.button import MDFlatButton
+
 
 from db.db_engine import DbEngine
 
 config = configparser.ConfigParser()
 config.read(Path(__file__).parent.joinpath('config.ini'))
 
+
+class MyToggleButton(MDFlatButton, MDToggleButton):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.background_down = self.theme_cls.primary_color
+
 class Kaktus(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         if platform == 'android':
             from notification.scheduled_task import schedule_task
-            schedule_task(minutes=20)
+            schedule_task()
 
         self._db_engine = DbEngine(
         sql_connection_str=

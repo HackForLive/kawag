@@ -22,7 +22,7 @@ source.include_exts = py,png,jpg,kv,atlas,ini
 source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-source.exclude_dirs = tests, bin, venv
+source.exclude_dirs = tests,bin,venv,venv310
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,kivymd,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml,beautifulsoup4,jnius,plyer,android,schedule,typing-extensions,sqlalchemy
+requirements = python3,kivy,kivymd,pyppeteer,appdirs,certifi,importlib-metadata,pyee,tqdm,urllib3,websockets,requests-html,bs4,fake-useragent,parse,pyppeteer,pyquery,requests,w3lib,cssselect,lxml==5.1.0,beautifulsoup4,jnius,plyer,android,schedule,typing-extensions,sqlalchemy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -97,7 +97,7 @@ fullscreen = 0
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
 #android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
-android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTERNAL_STORAGE, android.permission.FOREGROUND_SERVICE, android.permission.FOREGROUND, android.permission.RECEIVE_BOOT_COMPLETED
+android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTERNAL_STORAGE, android.permission.FOREGROUND_SERVICE, android.permission.FOREGROUND, android.permission.RECEIVE_BOOT_COMPLETED, android.permission.BACKGROUND, android.permission.BACKGROUND_SERVICE 
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host

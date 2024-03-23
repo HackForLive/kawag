@@ -10,7 +10,7 @@ manifest_path = os.path.join(
 print(manifest_path)
 
 RECEIVER_STRING = """
-    <receiver android:name=".TaskReceiver" android:enabled="true" android:exported="true">
+    <receiver android:name=".TaskAlarmReceiver" android:enabled="true" android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.USER_PRESENT" />
             <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -18,6 +18,11 @@ RECEIVER_STRING = """
             <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
             <action android:name="android.intent.action.MAIN" />
             <action android:name="android.intent.action.DELETE" />
+        </intent-filter>
+    </receiver>
+    <receiver android:name=".TaskReceiver" android:enabled="true" android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.USER_PRESENT" />
         </intent-filter>
     </receiver>
     </application>

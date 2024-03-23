@@ -12,6 +12,7 @@ import android.util.Log;
 import org.test.myapp.ServiceHandletask;
 
 public class TaskReceiver extends BroadcastReceiver {
+    private static final String APP_TAG = "org.test.myapp.task.receiver";
 
     // The onReceive method will start the service defined in the buildozer.spec file
     @Override
@@ -19,8 +20,10 @@ public class TaskReceiver extends BroadcastReceiver {
         // set argument to pass to python code
         Bundle extras = intent.getExtras();
         String argument = extras.getString("pythonServiceArgument");
-        Log.i("python", argument);
-        Log.i("python", "on receive (before)");
+        if(argument != null){
+            Log.i(APP_TAG, argument);
+        }
+        Log.i(APP_TAG, "on receive (before)");
         /*
             The ServiceHandleTask class corresponds to the class defined in the the buildozer.spec file as:
                 services = handletask:tasks.py
@@ -30,6 +33,6 @@ public class TaskReceiver extends BroadcastReceiver {
         // rewritten logic for service start in foreground
         Intent intentS = ServiceHandletask.getDefaultIntent(context, "", "My Application", "Handletask", "");
         context.startForegroundService(intentS);
-        Log.i("python", "on receive (after)");
+        Log.i(APP_TAG, "on receive (after)");
     }
 }
