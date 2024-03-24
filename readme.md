@@ -87,4 +87,11 @@ adb logcat -s "python"
     SUBSYSTEM=="usb", ATTR{product}=="moto g32", ATTR{serial}=="ZY22G2TM9G", MODE="0666", GROUP="plugdev"
     sudo udevadm control --reload-rules && sudo udevadm trigger
     ```
-    
+
+## Docker
+
+### Android
+
+```
+docker build -t test -f .\docker\android\Dockerfile .
+```
