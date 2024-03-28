@@ -1,19 +1,15 @@
 #:kivy 2.1.0
 
 MDScreen:
-    FitImage:
-        source:"img/background.png"
+    
     BoxLayout:
         orientation: "vertical"
-        size: root.width, root.height
-            
+        FitImage:
+            source:"img/background.png"
 
     BoxLayout:
         orientation: "horizontal"
-        # size: self.width, self.height
-        # height: 200
-        padding:[0]
-        size_hint: (1, None)
+        size_hint: (1, 0.2)
         canvas:
             Color:
                 rgb: 34, 139, 34
@@ -22,7 +18,7 @@ MDScreen:
                 pos:self.pos
         Label:
             id: word_label
-            size_hint: (1, None)
+            size_hint: (1, 1)
             text_size: self.size
             halign: "center"
             valign: "center"
@@ -32,7 +28,7 @@ MDScreen:
             color: "black"
 
         CheckBox:
-            size_hint: (1, None)
+            size_hint: (1, 1)
             font_size: 20
             color: "black"
             halign: "center"
