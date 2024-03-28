@@ -24,8 +24,7 @@ public class TaskExecutor{
     }
 
     public void cancelTask(){
-        Log.i("python", "-------------------- cancel scheduling");
-        Log.i("python", taskArgument);
+        Log.i(APP_TAG, "Preparing an intent to be cancelled.");
         AlarmManager alarmManager = (AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
 
         // The TaskReceiver class is the BroadcastReceiver set to handle the task when it is fired
@@ -33,6 +32,6 @@ public class TaskExecutor{
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
-        Log.i("python", "-------------------- cancelled");
+        Log.i(APP_TAG, "An intent is cancelled.");
     }
 }
