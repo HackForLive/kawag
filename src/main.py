@@ -55,6 +55,9 @@ class Kaktus(MDApp):
     def enable_or_disable_notification(self, value):
         if value: 
             Logger.info("enabled")
+            if platform == 'android':
+                from notification.scheduled_task import schedule_task
+                schedule_task()
         else:
             Logger.info("disabled")
             if platform == 'android':
