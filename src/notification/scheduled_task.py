@@ -34,3 +34,14 @@ def schedule_task():
 
     task_executor = TaskExecutor(python_activity)
     task_executor.triggerTask() # (json.dumps(task_details))
+
+def cancel_task():
+    """
+    Cancel a scheduled task
+    """
+    # task_details = {'title': title, 'message': message}
+    python_activity = PythonActivity.mActivity
+
+
+    task_executor = TaskExecutor(python_activity)
+    task_executor.cancelTask() # (json.dumps(task_details))

@@ -57,6 +57,9 @@ class Kaktus(MDApp):
             Logger.info("enabled")
         else:
             Logger.info("disabled")
+            if platform == 'android':
+                from notification.scheduled_task import cancel_task
+                cancel_task()
         pass
 
 if __name__ == "__main__":
