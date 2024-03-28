@@ -6,6 +6,7 @@ from kivy.utils import platform
 from kivymd.app import MDApp
 from kivymd.uix.behaviors.toggle_behavior import MDToggleButton
 from kivymd.uix.button import MDFlatButton
+from kivy.logger import Logger
 
 
 from db.db_engine import DbEngine
@@ -50,6 +51,13 @@ class Kaktus(MDApp):
             self.root.ids.word_label.text = latest.message
         else:
             self.root.ids.word_label.text = ''
+
+    def enable_or_disable_notification(self, value):
+        if value: 
+            Logger.info("enabled")
+        else:
+            Logger.info("disabled")
+        pass
 
 if __name__ == "__main__":
     Kaktus().run()
