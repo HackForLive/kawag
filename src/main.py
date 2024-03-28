@@ -52,6 +52,23 @@ class Kaktus(MDApp):
         else:
             self.root.ids.word_label.text = ''
 
+    def enable_or_disable_notification_T(self, *args):
+        Logger.info(args)
+        sc = self.root.ids.seg_options
+
+        sci_off = self.root.ids.sci_off
+        sci_on = self.root.ids.sci_on
+        if sc.current_active_segment == sci_on:
+            Logger.info("enabled")
+            if platform == 'android':
+                from notification.scheduled_task import schedule_task
+                schedule_task()
+        else:
+            Logger.info("disabled")
+            if platform == 'android':
+                from notification.scheduled_task import cancel_task
+                cancel_task()
+
     def enable_or_disable_notification(self, value):
         if value: 
             Logger.info("enabled")

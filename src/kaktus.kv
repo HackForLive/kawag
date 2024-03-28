@@ -1,37 +1,28 @@
 #:kivy 2.1.0
 
 MDScreen:
-    
+    FitImage:
+        source:"img/background.png"
     BoxLayout:
         orientation: "vertical"
-        FitImage:
-            source:"img/background.png"
-
-    BoxLayout:
-        orientation: "horizontal"
-        size_hint: (1, 0.15)
-        canvas:
-            Color:
-                rgb: 34, 139, 34
-            Rectangle:
-                size: self.size
-                pos:self.pos
-        Label:
-            id: word_label
-            size_hint: (1, 1)
-            text_size: self.size
-            halign: "center"
-            valign: "center"
-            text: "Enable Notification"
-            font_size: 30
-            padding:[5,5]
-            color: "black"
-
-        CheckBox:
-            size_hint: (1, 1)
-            font_size: 30
-            color: "black"
-            halign: "center"
-            valign: "center"
-            on_active: app.enable_or_disable_notification(self.active)
-                
+        
+    #BoxLayout:
+    #    orientation: "horizontal"
+    #    halign: "center"
+    MDSegmentedControl:
+        id: seg_options
+        on_active: app.enable_or_disable_notification_T(*args)
+        MDSegmentedControlItem:
+            id: sci_off
+            text: "Off"
+        MDSegmentedControlItem:
+            id: sci_on
+            text: "On"
+            #CheckBox:
+            #    size_hint: (1, 1)
+            #    font_size: 30
+            #    color: "black"
+            #    halign: "center"
+            #    valign: "center"
+            #    on_active: app.enable_or_disable_notification(self.active)
+            
