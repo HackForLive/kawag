@@ -35,12 +35,12 @@ Build is using buildozer and python for android
     sudo apt install python3 python3-pip python3-venv
     python3 -m venv venv
     source ./venv/bin/activate
-    pip3 install buildozer Cython==0.29.33
+    pip3 install setuptools buildozer Cython==3.0.11
     ```
 * package requirements
     ```
     sudo apt update
-    sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+    sudo apt install -y git zip unzip openjdk-17-jdk python3-pip  python3-venv autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo6 cmake libffi-dev libssl-dev
     ```
 * buildozer command for local android debug build
     ```
