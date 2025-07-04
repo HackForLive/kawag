@@ -1,28 +1,16 @@
-#:kivy 2.1.0
+#:kivy 2.3.0
 
 MDScreen:
     FitImage:
         source:"img/background.png"
     BoxLayout:
         orientation: "vertical"
-        
-    #BoxLayout:
-    #    orientation: "horizontal"
-    #    halign: "center"
     MDSegmentedControl:
         id: seg_options
-        on_active: app.enable_or_disable_notification_T(*args)
+        on_active: app.enable_or_disable_notification(*args)
         MDSegmentedControlItem:
             id: sci_off
             text: "Off"
         MDSegmentedControlItem:
             id: sci_on
             text: "On"
-            #CheckBox:
-            #    size_hint: (1, 1)
-            #    font_size: 30
-            #    color: "black"
-            #    halign: "center"
-            #    valign: "center"
-            #    on_active: app.enable_or_disable_notification(self.active)
-            

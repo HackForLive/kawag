@@ -6,6 +6,7 @@ requests-html
 pylint
 buildozer
 Cython==0.29.33
+# jnius
 pyjnius
 plyer
 schedule
@@ -14,3 +15,5 @@ schedule
 sqlalchemy==1.4.52
 pytest
 selenium
+lxml[html_clean]
+pypdf

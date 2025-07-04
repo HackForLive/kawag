@@ -1,0 +1,8 @@
+.git
+node_modules
+*.log
+
+# python venv
+venv*
+# buildozer build dir
+.buildozer

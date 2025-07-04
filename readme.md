@@ -12,6 +12,10 @@ How to install and setup KAWAG project.
 
 
 ### Desktop Application
+* JAVA installation and JAVA_HOME set for pyjnius
+> **_NOTE:_**  Pyjnius support python 3.12 (3.13 introduces bugs with Cython).
+>
+> `py -3.12 -m venv venv`
 * Bootstrap python venv
     ```
     python3 -m venv venv
@@ -79,6 +83,7 @@ adb logcat -s "python"
     . ./venv/bin/activate
     pip install buildozer
     pip install Cython==0.29.33
+    pip install setuptools
     buildozer -v android debug
     ```
 * ~~Setup udev rules for adb~~

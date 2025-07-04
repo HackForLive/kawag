@@ -13,6 +13,11 @@ def find_hour_range(message: str) -> list[str]:
     range_match = re.findall("od\\s*(\\d{1,2}):\\d{2}\\s*do\\s*(\\d{1,2}):\\d{2}", message)
     if range_match:
         return range_match
+    
+    range_match = re.findall("od.*(\\d{1,2}):\\d{2}.*do.*(\\d{2}):\\d{2}", message, 
+                             re.MULTILINE | re.DOTALL)
+    if range_match:
+        return range_match
 
     range_match = re.findall("od\\s*(\\d+)\\s*do\\s*(\\d+)", message)
     if range_match:

@@ -40,7 +40,91 @@ class TestKaktusRegex(unittest.TestCase):
             "Stačí si dobít dnes 24. 10. mezi 17. a 19. hodinou 2-5 stovek a my ti z toho uděláme" +
             " dvakrát takovou parádu.",
             "Dobij si dnes 13. 11. mezi 16. a 19 hodinou 2 - 5 stovek a užívej si dvojitej přívod" + 
-            "kreditu přímo do tvýho mobilního zařízení."
+            "kreditu přímo do tvýho mobilního zařízení.",
+            """
+1. Tyto Podmínky závazně upravují podmínky,
+za nichž společnost T-Mobile Czech Republic
+a.s. (dále jen „Operátor”) nabízí svým
+zákazníkům předplacené služby Kaktus (dále
+jen „Účastníkům”) bonusový kredit při dobití
+kreditu (dále jen „Nabídka”).
+2. Podmínky jsou uveřejněny na webových
+stránkách na adrese www.mujkaktus.cz
+Podmínky či jejich část mohou být dále
+komunikovány dalšími prostředky, např.
+tiskovou inzercí, plakáty, atd. V případě
+rozporu mezi zněním Podmínek uveřejněném
+na internetu a zněním Podmínek
+uveřejněném jiným způsobem je vždy
+rozhodující znění uveřejněné na shora
+uvedených webových stránkách.
+3. V otázkách neupravených v Podmínkách se
+přiměřeně užijí ustanovení aktuálních
+Všeobecných podmínek předplacené služby
+Kaktus, Podmínek zpracování osobních,
+identifikačních, provozních a lokalizačních
+údajů účastníků (dále společně jen „VPST”),
+dále aktuální Ceník služby Kaktus a
+ustanovení platného právního řádu České
+republiky.
+4. Pokud Účastník předplacené služby Kaktus
+v níže uvedeném období jednorázově dobije
+svůj kredit částkou 200 Kč nebo vyšší, získá
+automaticky kredit ve výši 100% \dobité
+částky navíc, maximálně však 500 Kč (dále
+jen „bonusový kredit”). Nabídku je možné
+využít v období od 23. 6. 2025 od 17:00 hod.
+do 23. 6. 2025 19:00 hod.
+5. Bonusový kredit se čerpá přednostně a je
+platný po dobu 30 dnů od data jeho připsání;
+nevyčerpaná část bonusového kreditu v této
+době bez náhrady propadá.
+6. Nabídka není určena pro Účastníky, kteří jsou
+podezřelí ze zneužití SIM karty. Žádost o
+vrácení standardního kreditu dobíjeného v
+rámci Nabídky při ukončení Smlouvy v
+případě, kdy byl ze strany Účastníka
+vyčerpán především bonusový kredit získaný
+za dobití v rámci Nabídky (bez vyčerpání
+alespoň poloviny částky, na základě jejíhož
+dobití došlo k připsání bonusového kreditu),
+je ze strany Operátora považováno za
+zneužití procesu dobíjení kreditu či procesu
+jeho výplaty dle článku 2. VOP a Operátor je
+v takovém případě oprávněn odmítnout
+standardní kredit vrátit, případně jej vrátit
+jen v poměrné výši.
+7. Bonusový kredit není možné využívat
+prostřednictvím GSM bran, Audiotexových
+služeb a prémiových služeb poskytovaných v
+rámci sítě elektronických komunikací
+Operátora. V případě, že Účastník poruší
+uvedená omezení nebo vznikne podezření z
+takového jednání, bude takové chování
+Účastníka považováno za zneužití Nabídky,
+resp. služeb podle příslušných ustanovení
+VPST s právem Operátora okamžitě
+Účastníkovi bonusový kredit přidělený dle
+této Nabídky odebrat.
+8. Operátor si vyhrazuje právo kdykoli v době
+trvání této nabídky, ale i v průběhu doby, kdy
+bude nabídka Účastníkem využívána,
+aktualizovat a měnit podmínky a rozsah této
+nabídky. O změnách podmínek bude Operátor
+Účastníka informovat v zákonem stanovené
+formě.
+9. Tyto Podmínky nabývají platnosti a účinnosti
+dne 23. 6. 2025.
+ODMĚNA ZA RYCHLÉ DOBITÍ
+Obchodní podmínky akce odměna za rychlé dobití
+k předplacené službě Kaktus
+
+
+společnosti T-Mobile Czech Republic a.s., se sídlem Tomíčkova 2144/1, 148 00 Praha 4, IČO: 649 49 681,
+zapsána do obchodního rejstříku vedeného Městským soudem v Praze, oddíl B, vložka 3787
+
+(dále jen „Podmínky”)
+            """
         ]
         self.dates_expected = [
             (20, 4),
@@ -55,7 +139,8 @@ class TestKaktusRegex(unittest.TestCase):
             (21, 8),
             (12, 10),
             (24, 10),
-            (13, 11)
+            (13, 11),
+            (23, 6)
         ]
         self.hours_expected = [
             (18, 21),
@@ -70,7 +155,8 @@ class TestKaktusRegex(unittest.TestCase):
             (16, 18),
             (16, 19),
             (17, 19),
-            (16, 19)
+            (16, 19),
+            (17, 19)
         ]
         # [print(msg.encode('utf-16', 'surrogatepass').decode('utf-16')) for msg in self.messages]
 
