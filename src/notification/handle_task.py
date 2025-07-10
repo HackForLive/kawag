@@ -92,15 +92,17 @@ class TaskManager:
         kaktus_content = self.fetch_kaktus_dobijecka_page()
         event_date, message = self.parse_kaktus_content(response=kaktus_content)
 
+        msg = f'Dobíječka\n{datetime.strftime(event_date, "%d/%m/%Y")}'
+
         latest = self.db_engine.get_latest_notification()
 
-        if not latest or latest.message != message or event_date == date.today():
-            self.db_engine.create_notification(msg=message)
+        if not latest or latest.message != msg or event_date == date.today():
+            self.db_engine.create_notification(msg=msg)
             if platform == 'android':
-                self.trigger_kaktus(title="It's time!", text=message)
+                self.trigger_kaktus(title="It's time!", text=msg)
         else:
             if platform == 'android':
-                self.trigger_kaktus(title="Nothing yet.", text=message)
+                self.trigger_kaktus(title="Nothing yet.", text=msg)
 
 if __name__ == '__main__':
     config = configparser.ConfigParser()

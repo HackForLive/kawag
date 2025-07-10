@@ -30,7 +30,7 @@ public class TaskExecutor{
         // The TaskReceiver class is the BroadcastReceiver set to handle the task when it is fired
         Intent intent = new  Intent(appContext, TaskReceiver.class);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(appContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         alarmManager.cancel(pendingIntent);
         Log.i(APP_TAG, "An intent is cancelled.");
     }

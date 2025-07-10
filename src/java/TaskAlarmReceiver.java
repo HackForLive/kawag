@@ -24,14 +24,11 @@ public class TaskAlarmReceiver extends BroadcastReceiver {
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		Intent i = new Intent(context, TaskReceiver.class); // explicit
 	
-                
-        long repeatInterval = 60000L; // 1 minute
-        long halfHourInternal = repeatInterval * 20; // 20 minutes interval
+        long triggerTime = 60000L; // 1 minute
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, i, 
-            PendingIntent.FLAG_CANCEL_CURRENT); // cancel current if any
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 
-            halfHourInternal, pendingIntent);
+            PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE); // cancel current if any
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
         Log.i(APP_TAG, "Alarm set.");
     }
 }

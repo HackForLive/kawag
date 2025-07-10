@@ -9,7 +9,13 @@ import android.provider.Settings;
 import android.os.Bundle;
 import android.util.Log;
 
+
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.PeriodicWorkRequest;
+
 import org.test.myapp.ServiceHandletask;
+import org.test.myapp.NotificationWorker;
 
 public class TaskReceiver extends BroadcastReceiver {
     private static final String APP_TAG = "org.test.myapp.task.receiver";
@@ -19,20 +25,25 @@ public class TaskReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent){
         // set argument to pass to python code
         Bundle extras = intent.getExtras();
-        String argument = extras.getString("pythonServiceArgument");
-        if(argument != null){
-            Log.i(APP_TAG, argument);
+        if (extras != null) {
+            String argument = extras.getString("pythonServiceArgument");
+            if (argument != null) {
+                Log.i(APP_TAG, argument);
+            } else {
+                Log.w(APP_TAG, "Missing key: pythonServiceArgument");
+            }
+        } else {
+            Log.w(APP_TAG, "Intent extras are null");
         }
+
+
         Log.i(APP_TAG, "on receive (before)");
         /*
             The ServiceHandleTask class corresponds to the class defined in the the buildozer.spec file as:
                 services = handletask:tasks.py
         */
-        // service start - do not work due to permission 
-        // ServiceHandletask.start(context, "");
-        // rewritten logic for service start in foreground
-        Intent intentS = ServiceHandletask.getDefaultIntent(context, "", "My Application", "Handletask", "");
-        context.startForegroundService(intentS);
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class).build();
+        WorkManager.getInstance(context).enqueue(workRequest);
         Log.i(APP_TAG, "on receive (after)");
     }
 }

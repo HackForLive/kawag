@@ -1,6 +1,8 @@
 from pathlib import Path
+from datetime import datetime
 import configparser
 
+from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.utils import platform
 from kivymd.app import MDApp
@@ -8,11 +10,26 @@ from kivymd.uix.behaviors.toggle_behavior import MDToggleButton
 from kivymd.uix.button import MDFlatButton
 from kivy.logger import Logger
 
+from kivy.core.text import LabelBase
+
+LabelBase.register(name="UbuntuMono", fn_regular="fonts/UbuntuMono-Regular.ttf")
+
 
 from db.db_engine import DbEngine
 
 config = configparser.ConfigParser()
 config.read(Path(__file__).parent.joinpath('config.ini'))
+
+if platform == "android":
+    from jnius import autoclass, cast
+    from android.permissions import request_permissions, Permission, check_permission
+
+    def ask_notification_permission():
+        if not check_permission(Permission.POST_NOTIFICATIONS):
+            request_permissions([Permission.POST_NOTIFICATIONS])
+else:
+    def ask_notification_permission():
+        pass
 
 
 class MyToggleButton(MDFlatButton, MDToggleButton):
@@ -21,6 +38,7 @@ class MyToggleButton(MDFlatButton, MDToggleButton):
         self.background_down = self.theme_cls.primary_color
 
 class Kaktus(MDApp):
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         if platform == 'android':
@@ -30,6 +48,8 @@ class Kaktus(MDApp):
         self._db_engine = DbEngine(
         sql_connection_str=
         f"sqlite:///{(Path(__file__).parent).joinpath(config['DEFAULT']['DB_NAME'])}")
+        Clock.schedule_interval(lambda dt: self.check_db_value(), 20)  # every 20 seconds
+
 
     def build(self):
         self.theme_cls.theme_style = "Dark"
@@ -66,13 +86,21 @@ class Kaktus(MDApp):
             else:
                 from notification.handle_task import TaskManager
                 tm = TaskManager(config=config)
-                Logger.info(tm.parse_kaktus_content(response=tm.fetch_kaktus_dobijecka_page()))
+                msg_date, msg=tm.parse_kaktus_content(response=tm.fetch_kaktus_dobijecka_page())
+                Logger.info(msg=msg)
+                message = f'Dobíječka\n{datetime.strftime(msg_date, "%d/%m/%Y")}'
+                self._db_engine.create_notification(msg=message)
         else:
             Logger.info("disabled")
             if platform == 'android':
                 from notification.scheduled_task import cancel_task
                 cancel_task()
 
+    def check_db_value(self):
+        latest = self._db_engine.get_latest_notification()
+        Logger.info(f'latest: {latest}')
+        if latest:
+            self.root.ids.message_label.text = latest.message
 
 if __name__ == "__main__":
     Kaktus().run()

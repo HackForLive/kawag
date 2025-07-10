@@ -13,7 +13,7 @@ package.domain = org.test
 source.dir = ./src
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas,ini
+source.include_exts = py,png,jpg,kv,atlas,ini,ttf
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -97,14 +97,14 @@ fullscreen = 0
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
 #android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
-android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTERNAL_STORAGE, android.permission.FOREGROUND_SERVICE, android.permission.FOREGROUND, android.permission.RECEIVE_BOOT_COMPLETED, android.permission.BACKGROUND, android.permission.BACKGROUND_SERVICE 
+android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,FOREGROUND_SERVICE,FOREGROUND,RECEIVE_BOOT_COMPLETED,BACKGROUND,BACKGROUND_SERVICE,POST_NOTIFICATIONS,SCHEDULE_EXACT_ALARM
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
 # TODO: fix
-android.api = 30
+android.api = 31
 
 # (int) Minimum API your APK / AAB will support.
 #android.minapi = 21
@@ -204,12 +204,13 @@ android.add_src = src/java
 #android.add_resources =
 
 # (list) Gradle dependencies to add
-#android.gradle_dependencies =
+android.gradle_dependencies = androidx.work:work-runtime:2.8.1
+
 
 # (bool) Enable AndroidX support. Enable when 'android.gradle_dependencies'
 # contains an 'androidx' package, or any package from Kotlin source.
 # android.enable_androidx requires android.api >= 28
-#android.enable_androidx = True
+android.enable_androidx = True
 
 # (list) add java compile options
 # this can for example be necessary when importing certain java libraries using the 'android.gradle_dependencies' option

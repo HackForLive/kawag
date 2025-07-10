@@ -1,16 +1,53 @@
 #:kivy 2.3.0
 
 MDScreen:
-    FitImage:
+    Image:
         source:"img/background.png"
+        size_hint: None, None
+        width: root.width
+        height: self.width  # or adjust based on aspect ratio
+        pos_hint: {"right": 1, "center_y": 0.5}
+
+
     BoxLayout:
         orientation: "vertical"
-    MDSegmentedControl:
-        id: seg_options
-        on_active: app.enable_or_disable_notification(*args)
-        MDSegmentedControlItem:
-            id: sci_off
-            text: "Off"
-        MDSegmentedControlItem:
-            id: sci_on
-            text: "On"
+        Label:
+            id: message_label
+            pos_hint: {"center_x": 0.5, "center_y": 0.6}
+            text: "  |\n(_|_)\n  |"
+            color: 0.2, 1, 0.6, 1
+            font_size: '24sp'
+            size_hint: None, None
+            size: self.texture_size
+            font_name: "UbuntuMono"
+            halign: 'left'
+            valign: 'top'
+            markup: False
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.7  # Shadow color
+                BoxShadow:
+                    pos: self.pos
+                    size: self.size
+                    offset: 0, -6
+                    blur_radius: 20
+                    spread_radius: -5, -5
+                    border_radius: 12, 12, 12, 12
+                Color:
+                    rgba: 0, 0, 0, 1  # Background color
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [12]
+
+
+        MDSegmentedControl:
+            id: seg_options
+            pos_hint: {"center_x": 0.5}
+            on_active: app.enable_or_disable_notification(*args)
+            MDSegmentedControlItem:
+                id: sci_off
+                text: "Off"
+            MDSegmentedControlItem:
+                id: sci_on
+                text: "On"
