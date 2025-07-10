@@ -48,7 +48,10 @@ class Kaktus(MDApp):
         self._db_engine = DbEngine(
         sql_connection_str=
         f"sqlite:///{(Path(__file__).parent).joinpath(config['DEFAULT']['DB_NAME'])}")
-        Clock.schedule_interval(lambda dt: self.check_db_value(), 20)  # every 20 seconds
+        Clock.schedule_interval(lambda dt: self.check_db_value(), 30)  # every 20 seconds
+    
+    def on_start(self):
+        Clock.schedule_once(lambda dt: ask_notification_permission(), 10)
 
 
     def build(self):
