@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.PeriodicWorkRequest;
+import android.app.PendingIntent;
+import android.app.AlarmManager;
+// import androidx.work.OneTimeWorkRequest;
+// import androidx.work.WorkManager;
+// import androidx.work.PeriodicWorkRequest;
 
 import org.test.myapp.ServiceHandletask;
-import org.test.myapp.NotificationWorker;
+// import org.test.myapp.NotificationWorker;
 
 public class TaskReceiver extends BroadcastReceiver {
     private static final String APP_TAG = "org.test.myapp.task.receiver";
@@ -42,8 +44,19 @@ public class TaskReceiver extends BroadcastReceiver {
             The ServiceHandleTask class corresponds to the class defined in the the buildozer.spec file as:
                 services = handletask:tasks.py
         */
-        OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class).build();
-        WorkManager.getInstance(context).enqueue(workRequest);
+        Intent intentS = ServiceHandletask.getDefaultIntent(context, "", "My Application", "Handletask", "");
+        context.startForegroundService(intentS);
+
+        int minutes = 20;
+        long triggerTime = System.currentTimeMillis() + 60000L * minutes;
+        
+        Intent i = new Intent(context, TaskReceiver.class); // explicit
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, i, 
+            PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE); // cancel current if any
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+        // OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class).build();
+        // WorkManager.getInstance(context).enqueue(workRequest);
         Log.i(APP_TAG, "on receive (after)");
     }
 }

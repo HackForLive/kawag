@@ -24,7 +24,8 @@ public class TaskAlarmReceiver extends BroadcastReceiver {
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		Intent i = new Intent(context, TaskReceiver.class); // explicit
 	
-        long triggerTime = 60000L; // 1 minute
+        int minutes = 2;
+        long triggerTime = System.currentTimeMillis() + 60000L * minutes;
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, i, 
             PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE); // cancel current if any
